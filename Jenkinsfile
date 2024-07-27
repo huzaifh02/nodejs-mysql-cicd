@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'gitcred', url: 'https://github.com/huzaifh02/nodejs-mysql-cicd.git' // GitHub repo URL and credentials
+                git branch: 'master', credentialsId: 'gitcred', url: 'https://github.com/huzaifh02/nodejs-mysql-cicd.git'
             }
         }
 
@@ -39,9 +39,9 @@ pipeline {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << EOF
                     docker pull ${DOCKER_IMAGE}:latest
-                    docker stop app-cont || true
-                    docker rm app-cont || true
-                    docker run -d --name app-cont -p 3000:3000 ${DOCKER_IMAGE}:latest
+                    docker stop ${DOCKER_IMAGE} || true
+                    docker rm ${DOCKER_IMAGE} || true
+                    docker run -d --name ${DOCKER_IMAGE} -p 3000:3000 ${DOCKER_IMAGE}:latest
                     EOF
                     """
                 }
