@@ -38,17 +38,14 @@ pipeline {
                 sshagent([SSH_CREDENTIALS]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << EOF
-                    # Stop and remove the existing container if it exists
-                    sudo docker stop nodejsapp || true
-                    sudo docker rm nodejsapp || true
 
-                    # Remove the old image
-                    sudo docker rmi ${DOCKER_IMAGE}:latest || true
+                    sudo docker stop $(sudo docker ps -aq) || true
+                    sudo docker rm $(sudo docker ps -aq) || true
+                    sudo docker rmi $(sudo docker images -q) || true
 
-                    # Pull the new image
                     sudo docker pull ${DOCKER_IMAGE}:latest
 
-                    # Run the new container
+
                     sudo docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
                     EOF
                     """
