@@ -39,17 +39,17 @@ pipeline {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << EOF
                     # Stop and remove the existing container if it exists
-                    docker stop nodejsapp || true
-                    docker rm nodejsapp || true
+                    sudo docker stop nodejsapp || true
+                    sudo docker rm nodejsapp || true
 
                     # Remove the old image
-                    docker rmi ${DOCKER_IMAGE}:latest || true
+                    sudo docker rmi ${DOCKER_IMAGE}:latest || true
 
                     # Pull the new image
-                    docker pull ${DOCKER_IMAGE}:latest
+                    sudo docker pull ${DOCKER_IMAGE}:latest
 
                     # Run the new container
-                    docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
+                    sudo docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
                     EOF
                     """
                 }
