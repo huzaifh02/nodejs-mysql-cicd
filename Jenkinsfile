@@ -15,6 +15,12 @@ pipeline {
             }
         }
 
+        stage('Clean Docker Images in Jenkins') {
+            steps {
+                sh "sudo docker rmi \$(sudo docker images -q) || true"
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
