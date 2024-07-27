@@ -39,9 +39,9 @@ pipeline {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << EOF
                     sudo docker pull ${DOCKER_IMAGE}:latest
-                    sudo docker stop ${DOCKER_IMAGE} || true
-                    sudo docker rm ${DOCKER_IMAGE} || true
-                    sudo docker run -d --name ${DOCKER_IMAGE} -p 3000:3000 ${DOCKER_IMAGE}:latest
+                    sudo docker stop nodejsapp || true
+                    sudo docker rm nodejsapp || true
+                    sudo docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
                     EOF
                     """
                 }
