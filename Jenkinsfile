@@ -38,14 +38,14 @@ pipeline {
                 sshagent([SSH_CREDENTIALS]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} << 'EOF'
-                    sudo docker stop \$(sudo docker ps -aq) || true
-                    sudo docker rm \$(sudo docker ps -aq) || true
-                    sudo docker rmi \$(sudo docker images -q) || true
+sudo docker stop \$(sudo docker ps -aq) || true
+sudo docker rm \$(sudo docker ps -aq) || true
+sudo docker rmi \$(sudo docker images -q) || true
 
-                    sudo docker pull ${DOCKER_IMAGE}:latest
+sudo docker pull ${DOCKER_IMAGE}:latest
 
-                    sudo docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
-                    EOF
+sudo docker run -d --name nodejsapp -p 3000:3000 ${DOCKER_IMAGE}:latest
+EOF
                     """
                 }
             }
