@@ -3,4 +3,3 @@ provider "aws" {
   max_retries              = 10
   skip_metadata_api_check  = true
 }
-
