@@ -105,8 +105,23 @@ By following these steps, I successfully set up the necessary infrastructure, co
 
 ## Challenges Faced
 
-- **Terraform Configuration**: Ensuring the Terraform configuration was correct and that all dependencies were properly managed.
-- **Jenkins Pipeline**: Configuring the Jenkins pipeline to work seamlessly with Docker and Terraform.
-- **Security Groups**: Properly configuring security groups to ensure secure and functional network communication between instances and services.
+- **Cleaning Up Old Builds**:
+  - Too many builds were eating up disk space with old Docker images, which could crash the server. I added a stage in the Jenkins pipeline to clean up these old images and builds.
+
+- **Security Groups**:
+  - Setting up security groups to keep the network communication secure and functional was tricky. I had to make sure the rules allowed the necessary traffic while keeping everything safe.
+
+- **Handling Credentials**:
+  - Keeping all the credentials (GitHub tokens, Docker creds, SSH keys) secure and correctly set up in Jenkins was a bit of a headache. I had to double-check everything to make sure it was all good.
+
+- **Terraform Dependencies**:
+  - Making sure Terraform created resources in the right order was a challenge. I had to keep validating the config to avoid messing things up.
+
+- **Monitoring Setup**:
+  - Getting Prometheus and Grafana up and running took some effort. I had to configure them to collect and show the right metrics and make sure Node Exporter was working on the Node.js instance.
+
+- **Setting Up Webhooks**:
+  - Setting up the GitHub webhook to automatically trigger Jenkins builds was a bit fiddly. I had to make sure it pointed to the right place and handled 
+
 
 ---
