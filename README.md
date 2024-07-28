@@ -46,18 +46,7 @@ The following AWS resources are set up using Terraform:
    - `nodejsapp`
    - `rds`
    - `monitoring`
-
-## Monitoring
-
-Monitoring is set up using Prometheus and Grafana. These services are deployed on a separate EC2 instance.
-
-1. **Prometheus Configuration**:
-   - Scrape configurations for the Node.js app and other services are added to \`prometheus.yml\`.
-
-2. **Grafana Configuration**:
-   - Prometheus is added as a data source in Grafana.
-   - Dashboards are created to visualize key metrics.
-
+  
 ## Terraform Templates
 
 The Terraform templates provision the required infrastructure on AWS. The following files are included in the repository:
@@ -69,6 +58,17 @@ The Terraform templates provision the required infrastructure on AWS. The follow
 - `rds.tf`: Defines the RDS instance for the MySQL database.
 - `secgrp.tf`: Defines the security groups for Jenkins, monitoring, Node.js app, and RDS.
 - `vars.tf`: Defines the variables used in the Terraform configuration.
+
+## Monitoring
+
+Monitoring is set up using Prometheus and Grafana. These services are deployed on a separate EC2 instance.
+
+1. **Prometheus Configuration**:
+   - Scrape configurations for the Node.js app and other services are added to \`prometheus.yml\`.
+
+2. **Grafana Configuration**:
+   - Prometheus is added as a data source in Grafana.
+   - Dashboards are created to visualize key metrics.
 
 ## Setting Up CI/CD Pipeline
 
