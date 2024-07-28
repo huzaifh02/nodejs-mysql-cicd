@@ -52,15 +52,12 @@ The following AWS resources are set up using Terraform:
 The Node.js app is deployed on an EC2 instance using Docker. The steps include:
 
 1. **Build Docker Image**:
-   \`\`\`sh
-   docker build -t huzaifh02/nodejsapp:latest .
-   \`\`\`
+    docker build -t huzaifh02/nodejsapp:latest .
+
 
 2. **Run Docker Container**:
-   \`\`\`sh
    docker run -d --name nodejsapp -p 3000:3000 huzaifh02/nodejsapp:latest
-   \`\`\`
-
+   
 ## Setting Up CI/CD Pipeline
 
 The Jenkinsfile for setting up the CI/CD pipeline is included in the repository.
