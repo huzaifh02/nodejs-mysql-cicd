@@ -47,21 +47,6 @@ The following AWS resources are set up using Terraform:
    - `rds`
    - `monitoring`
 
-## Deploying Node.js App on EC2
-
-The Node.js app is deployed on an EC2 instance using Docker. The steps include:
-
-1. **Build Docker Image**:
-    docker build -t huzaifh02/nodejsapp:latest .
-
-
-2. **Run Docker Container**:
-   docker run -d --name nodejsapp -p 3000:3000 huzaifh02/nodejsapp:latest
-   
-## Setting Up CI/CD Pipeline
-
-The Jenkinsfile for setting up the CI/CD pipeline is included in the repository.
-
 ## Monitoring
 
 Monitoring is set up using Prometheus and Grafana. These services are deployed on a separate EC2 instance.
@@ -76,10 +61,18 @@ Monitoring is set up using Prometheus and Grafana. These services are deployed o
 ## Terraform Templates
 
 The Terraform templates provision the required infrastructure on AWS. The following files are included in the repository:
-- \`vars.tf\`: Defines the variables.
-- \`keypairs.tf\`: Defines the key pairs.
-- \`secgrp.tf\`: Defines the security groups.
-- \`backend-services.tf\`: Defines the EC2 instances and RDS instance.
+
+- `backend.tf`: Configures the backend for Terraform state storage.
+- `instances.tf`: Defines the EC2 instances for Jenkins, monitoring, and the Node.js app.
+- `keypairs.tf`: Defines the key pairs for SSH access to the instances.
+- `providers.tf`: Configures the providers required for the AWS resources.
+- `rds.tf`: Defines the RDS instance for the MySQL database.
+- `secgrp.tf`: Defines the security groups for Jenkins, monitoring, Node.js app, and RDS.
+- `vars.tf`: Defines the variables used in the Terraform configuration.
+
+## Setting Up CI/CD Pipeline
+
+The Jenkinsfile for setting up the CI/CD pipeline is included in the repository.  
 
 ## Setup and Run Instructions
 
@@ -93,36 +86,26 @@ The Terraform templates provision the required infrastructure on AWS. The follow
 ### Steps
 
 1. **Clone the repository**:
-   \`\`\`sh
    git clone https://github.com/huzaifh02/nodejs-mysql-cicd.git
-   \`\`\`
+   
 
 2. **Navigate to the repository directory**:
-   \`\`\`sh
-   cd nodejs-mysql-cicd
-   \`\`\`
+   cd nodejs-mysql-cicd/Terraform
+   
 
 3. **Initialize Terraform**:
-   \`\`\`sh
-   terraform init
-   \`\`\`
-
+   terraform init  
+   
 4. **Validate the Terraform configuration**:
-   \`\`\`sh
    terraform validate
-   \`\`\`
 
 5. **Plan the deployment**:
-   \`\`\`sh
    terraform plan
-   \`\`\`
 
 6. **Apply the Terraform configuration**:
-   \`\`\`sh
    terraform apply
-   \`\`\`
 
-7. **Set up Jenkins and configure the Jenkinsfile for the CI/CD pipeline**.
+7. **Set up Jenkins,  and configure the Jenkinsfile for the CI/CD pipeline**.
 
 8. **Deploy the Node.js app using Docker commands**.
 
