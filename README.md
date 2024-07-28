@@ -28,15 +28,8 @@ The following AWS resources are set up using Terraform:
    - `monitoring`
 
 2. **RDS Instance**:
-   - The RDS instance is created with the following settings:
-     - DB Instance Identifier: mysql57-instance
-     - DB Instance Class: db.t2.micro
-     - Engine: mysql
-     - Engine Version: 5.7
-     - Allocated Storage: 20 GB
-     - Master Username: root
-     - Master User Password: 12345678
-
+   - mysql
+ 
 3. **Key Pairs**:
    - `jenkins`
    - `nodejsapp`
@@ -76,45 +69,39 @@ The Jenkinsfile for setting up the CI/CD pipeline is included in the repository.
 
 ## Setup and Run Instructions
 
-### Prerequisites
+### Step-by-Step Process
 
-1. Install Docker.
-2. Install Terraform.
-3. Install Jenkins.
-4. AWS account with the necessary permissions.
+1. **Created an S3 Bucket for Terraform State File**:
+   - I started by creating an S3 bucket to store the Terraform state file. This bucket is essential for managing the state of the Terraform deployment and ensuring consistent provisioning of resources.
 
-### Steps
+2. **Provisioned Resources Using Terraform**:
+   - I used Terraform from my local computer to provision the necessary AWS resources. This involved:
+     - Initializing Terraform with `terraform init`.
+     - Validating the configuration with `terraform validate`.
+     - Planning the deployment with `terraform plan`.
+     - Applying the configuration with `terraform apply`.
 
-1. **Clone the repository**:
-   git clone https://github.com/huzaifh02/nodejs-mysql-cicd.git
-   
+3. **Configured Each Instance**:
 
-2. **Navigate to the repository directory**:
-   cd nodejs-mysql-cicd/Terraform
-   
+   - **Jenkins Server**:
+     - I installed Jenkins on the designated server.
+     - I added the required plugins, to facilitate secure operations.
+     - I configured credentials within Jenkins, including the GitHub access token, Docker credentials, and SSH access to EC2.
+     - I created a Jenkins pipeline and prepared it for the CI/CD process.
+     - I installed Docker on the Jenkins instance to handle containerization tasks.
 
-3. **Initialize Terraform**:
-   terraform init  
-   
-4. **Validate the Terraform configuration**:
-   terraform validate
+   - **Node.js Instance**:
+     - I installed Docker on the Node.js instance to support containerized applications.
+     - I set up Node Exporter to collect and expose metrics for monitoring purposes.
 
-5. **Plan the deployment**:
-   terraform plan
+   - **Monitoring Instance**:
+     - I set up Prometheus on the monitoring instance to scrape and store metrics from various sources.
+     - I installed and configured Grafana to visualize the metrics collected by Prometheus.
 
-6. **Apply the Terraform configuration**:
-   terraform apply
+4. **Created a Webhook on GitHub**:
+   - To automate the build process, I created a webhook on the GitHub repository. This webhook triggers the Jenkins pipeline automatically whenever new code is pushed to the repository.
 
-7. **Set up Jenkins,  and configure the Jenkinsfile for the CI/CD pipeline**.
-
-8. **Deploy the Node.js app using Docker commands**.
-
-## Design Decisions
-
-- **Infrastructure as Code (IaC)**: Used Terraform for provisioning infrastructure to ensure consistency and repeatability.
-- **Docker**: Containerized the Node.js app to make the deployment process easier and more consistent across environments.
-- **CI/CD Pipeline**: Implemented using Jenkins to automate the build, test, and deployment processes.
-- **Monitoring**: Set up Prometheus and Grafana for real-time monitoring and visualization of metrics.
+By following these steps, I successfully set up the necessary infrastructure, configured each instance properly, and ensured that the CI/CD pipeline is ready to handle automated deployments triggered by GitHub webhooks.
 
 ## Challenges Faced
 
