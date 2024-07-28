@@ -8,11 +8,11 @@ https://github.com/user-attachments/assets/cc52304e-0107-46f6-96e3-c20b7738408b
 
 ### CI/CD Pipeline Diagram
 
-![CI/CD Pipeline Diagram](path/to/cicd-pipeline-diagram.png)
+![arch2](https://github.com/user-attachments/assets/84e7501b-e925-455c-8674-6e343225fd68)
 
 ### Terraform and AWS Resources Diagram
 
-![Terraform and AWS Resources Diagram](path/to/terraform-aws-resources-diagram.png)
+![arch1](https://github.com/user-attachments/assets/71f63fb4-f611-459e-93bb-6cd232a5771a)
 
 ## Dockerizing the Node.js App
 
